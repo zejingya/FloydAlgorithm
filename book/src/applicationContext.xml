@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE beans [
+    <!ELEMENT beans (bean*)>
+    <!ELEMENT bean (property*)>
+    <!ELEMENT property (#PCDATA)>
+
+    <!ATTLIST bean id ID #REQUIRED>
+    <!ATTLIST bean class CDATA #IMPLIED>
+    <!ATTLIST property name CDATA #IMPLIED>
+    <!ATTLIST property ref IDREF #IMPLIED>
+]>
+
+<beans>
+
+    <bean id="page" class="com.zejing.myssm.myspringmvc.PageController"/>
+
+    <bean id="UserDAO" class="com.zejing.book.dao.Impl.UserDAOImpl"/>
+    <bean id="BookDAO" class="com.zejing.book.dao.Impl.BookDAOImpl"/>
+    
+    <bean id="userService" class="com.zejing.book.service.Impl.UserServiceImpl">
+        <property name="UserDao" ref="UserDAO"/>
+    </bean>
+    <bean id="bookService" class="com.zejing.book.service.Impl.BookServiceImpl">
+        <property name="BookDAO" ref="BookDAO"/>
+    </bean>
+
+    <bean id="User" class="com.zejing.book.controller.UserController">
+        <property name="userService" ref="userService"/>
+    </bean>
+    <bean id="Book" class="com.zejing.book.controller.BookController">
+        <property name="bookService" ref="bookService"/>
+    </bean>
+    
+
+</beans>
